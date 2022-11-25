@@ -3,8 +3,8 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
-  const [result, setResult] = useState();
+  const [businessInput, setBusinessInput] = useState("");
+  const [result, setResult] = useState([]);
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -13,34 +13,50 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ animal: animalInput }),
+      body: JSON.stringify({
+        business: `${result ?? result?.split()} ${businessInput}`,
+      }),
     });
     const data = await response.json();
-    setResult(data.result);
-    setAnimalInput("");
+    const newResult = [...result, data.result];
+    setResult(newResult);
   }
-
+  const clear = (event) => {
+    setResult([]);
+    setBusinessInput("");
+  };
   return (
     <div>
       <Head>
         <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <link rel="icon" href="/suit.jpeg" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
-        <form onSubmit={onSubmit}>
+        <img src="/suit.jpeg" className={styles.icon} />
+        <h3>How to say it at work</h3>
+        <form onSubmit={onSubmit} autoComplete="off">
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="business"
+            placeholder="Enter  business speak"
+            value={businessInput}
+            onChange={(e) => setBusinessInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value="Generate the shtick" />
+          <input type="button" value="Clear" onClick={clear} />
         </form>
-        <div className={styles.result}>{result}</div>
+        <div
+          style={{
+            fontWeight: "bold",
+            marginTop: "40px",
+            width: "100%",
+            textAlign: "center",
+            height: "100%;",
+          }}
+        >
+          {result.map((r) => r)}
+        </div>
       </main>
     </div>
   );
