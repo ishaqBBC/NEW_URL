@@ -4,26 +4,33 @@ import styles from "./index.module.css";
 
 export default function Home() {
   const [businessInput, setBusinessInput] = useState("");
-  const [result, setResult] = useState([]);
+  const [results, setResults] = useState([]);
 
   async function onSubmit(event) {
     event.preventDefault();
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        business: `${result ?? result?.split()} ${businessInput}`,
-      }),
-    });
-    const data = await response.json();
-    const newResult = [...result, data.result];
-    setResult(newResult);
+    if (businessInput.length) {
+      const speak = `${results ?? results?.join()} ${businessInput} `;
+      // TODO: Ishaq remove console
+      // eslint-disable-next-line no-console
+      console.log(speak, "the speak");
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          business: speak,
+        }),
+      });
+
+      const data = await response.json();
+      const newResult = [...results, data.result];
+      setResults(newResult);
+      setBusinessInput("");
+    }
   }
   const clear = (event) => {
-    setResult([]);
-    setBusinessInput("");
+    setResults([]);
   };
   return (
     <div>
@@ -39,7 +46,7 @@ export default function Home() {
           <input
             type="text"
             name="business"
-            placeholder="Enter  business speak"
+            placeholder="What do you really want to say..."
             value={businessInput}
             onChange={(e) => setBusinessInput(e.target.value)}
           />
@@ -55,7 +62,7 @@ export default function Home() {
             height: "100%;",
           }}
         >
-          {result.map((r) => r)}
+          {results.map((r) => r)}
         </div>
       </main>
     </div>
