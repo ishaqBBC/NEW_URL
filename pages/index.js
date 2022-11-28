@@ -51,7 +51,24 @@ export default function Home() {
             onChange={(e) => setBusinessInput(e.target.value)}
           />
           <input type="submit" value="Generate the shtick" />
-          <input type="button" value="Clear" onClick={clear} />
+          <input
+            type="button"
+            value="Clear"
+            style={{
+              fontSize: "16px",
+              lineHeight: "24px",
+              fontFamily: '"ColfaxAI", Helvetica, sans-serif',
+              padding: "12px 0",
+              color: "#fff",
+              backgroundColor: "#a3104d",
+              border: "none",
+              borderRadius: "4px",
+              textAlign: "center",
+              cursor: "pointer",
+              marginTop: "2rem",
+            }}
+            onClick={clear}
+          />
         </form>
         <div
           style={{
