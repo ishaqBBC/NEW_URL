@@ -10,9 +10,7 @@ export default function Home() {
     event.preventDefault();
     if (businessInput.length) {
       const speak = `${results ?? results?.join()} ${businessInput} `;
-      // TODO: Ishaq remove console
-      // eslint-disable-next-line no-console
-      console.log(speak, "the speak");
+  
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {

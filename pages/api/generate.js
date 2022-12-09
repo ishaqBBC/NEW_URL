@@ -15,47 +15,41 @@ export default async function (req, res) {
 }
 
 function generatePrompt(normalSpeak) {
-  const capitalisedBusiness = normalSpeak
+  const capitalisedFrank = normalSpeak
     ? normalSpeak[0].toUpperCase() + normalSpeak.slice(1).toLowerCase()
     : "please enter a phrase";
   if (normalSpeak) {
-    return `Suggest how to say this like business?.
+    return `Say it like a Frank.
+
 
 Normal: Don’t expect to hear from me again.
-Business: I will get back to you in due course.
-
+Frank:  I will get back to you in due course.
 Normal: lets talk about it later.
-Business: lets circle back.
-
+Frank: lets circle back.
 Normal: I do nothing in the company, but get payed allot.
-Business: I'm a change leader.
-
+Frank: I'm a change leader.
 Normal: I will pay you minimum wage.
-Business: I offer a Competitive salary.
-
-Normal: We are seriously understaffed
-Business: We run lean.
-
-Normal: this guy is stopping me doing my work
-Business: We are expriencing pushback
-
-Normal: Im not doing this extra work
-Business: I believe this is scope creep, and therefore requires another ticket to be raised
-
-Normal: that sounds like a you problem
-Business: I believe that falls within the scope of your responsibilites, but im happy to support where it makes sense
-
-Normal: stop emailing me so often
-Business: to ensure the information does not get lost , lets reduce frequency of communication
-
-Normal: fuck off 
-Business: regards
-
+Frank: I offer a Competitive salary.
+Normal: We are seriously understaffed.
+Frank: We run lean.
+Normal: this guy is stopping me from doing my work.
+Frank: We are expriencing pushback.
+Normal: Im not doing this extra work.
+Frank: I believe this is scope creep, and therefore requires another ticket to be raised.
+Normal: that sounds like a you problem.
+Frank: I believe that falls within the scope of your responsibilites, but im happy to support where it makes sense.
+Normal: stop emailing me so often,
+Frank: to ensure the information does not get lost , lets reduce frequency of communication.
+Normal: fuck off .
+Frank: regards.
 Normal: I'm lazy and unemployed and spend my time losing money in crypto.
-Business: Im an entrepreneur
+Frank: Im an entrepreneur.
+Normal: I hate it here.
+Frank: We work hard, play hard.
 
-Normal: ${capitalisedBusiness}
-Business:`;
+Normal: ${capitalisedFrank}.
+Frank: 
+`;
   }
   return "please enter a phrase";
 }
